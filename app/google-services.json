@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "557157298476",
+    "project_id": "scoutv1-68da0",
+    "storage_bucket": "scoutv1-68da0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557157298476:android:a95860a4bf4cf2a16cbc89",
+        "android_client_info": {
+          "package_name": "com.example.scoutv1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557157298476-k7g317242fqhu0283o7hoargi9hc1541.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtKyHD0egcA_lu9Y1q3SvSNeuN4etvqw4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557157298476-k7g317242fqhu0283o7hoargi9hc1541.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

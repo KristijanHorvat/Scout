@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Scoutv1</string>
+    <string name="signUp_hint1">Type your Email</string>
+    <string name="signUp_hint2">Type Your Password</string>
+    <string name="signUp_hint3">Retype Your Password</string>
+    <string name="signUp_button">Sign Up</string>
+    <string name="signUp_last">Already Registered, Sign In!</string>
+
+    <string name="signIn_hint1">Type your Email</string>
+    <string name="signIn_hint2">Type Your Password</string>
+    <string name="signIn_button">Sign In</string>
+    <string name="signIn_last">Not Registered Yet, Sign Up!</string>
+
+    <string name="main_search">Search</string>
+    <string name="main_search_text">Search</string>
+
+
+</resources>

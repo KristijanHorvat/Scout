@@ -13,6 +13,14 @@
 
     <string name="main_search">Search</string>
     <string name="main_search_text">Search</string>
+    <string name="otherButton">OTHER</string>
+
+    <string name="itemNameText">NAME</string>
+    <string name="itemDescriptionText">Add Description...</string>
+    <string name="itemPhoneNumberText">Add phone number</string>
+    <string name="itemUploadButton">Add</string>
+    <string name="addIteButton">Add Item</string>
+    <string name="myAccountButton">My Account</string>
 
 
 </resources>

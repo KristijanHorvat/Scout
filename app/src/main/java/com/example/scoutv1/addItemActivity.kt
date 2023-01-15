@@ -14,27 +14,49 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.provider.MediaStore
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Spinner
+import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.main.activity_add_item.*
+import java.io.IOException
 import java.util.*
 
 class addItemActivity : AppCompatActivity() {
-    lateinit var imageView: ImageView
-    var pickedPhoto : Uri? = null
-    var pickedBitMap : Bitmap? = null
+
+    val PICK_IMAGE_REQUEST = 71
+    var filePath: Uri? = null
+    var firebaseStore: FirebaseStorage? = null
+    var storageReference: StorageReference? = null
+    lateinit var btn_upload_image: Button
+    lateinit var imagePreview: ImageView
+    var path: String = ""
+    val db = Firebase.firestore
+    lateinit var categoriesSpinner: Spinner
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_item)
 
-        val spinner: Spinner = findViewById(R.id.itemCategory)
+        btn_upload_image = findViewById(R.id.button9)
+        firebaseStore = FirebaseStorage.getInstance()
+        storageReference = FirebaseStorage.getInstance().reference
+
+        imagePreview = findViewById<ImageView>(R.id.imageView)
+
+        imagePreview.setOnClickListener { launchGallery() }
+        btn_upload_image.setOnClickListener {
+            uploadImage()
+
+        }
+        categoriesSpinner = findViewById(R.id.itemCategory)
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
             this,
@@ -44,49 +66,42 @@ class addItemActivity : AppCompatActivity() {
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Apply the adapter to the spinner
-            spinner.adapter = adapter
+            categoriesSpinner.adapter = adapter
         }
+    }
+    private fun launchGallery() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
+    }
+    private fun uploadImage(){
+        if(filePath != null){
+            path = "myImages/" + UUID.randomUUID().toString()
+            val ref = storageReference?.child(path)
+            val uploadTask = ref?.putFile(filePath!!)
+            Toast.makeText(this, "Upload success", Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(this, "Please Upload an Image", Toast.LENGTH_SHORT).show()
+        }
+    }
 
-    }
-    fun pickPhoto(view: View){
-        if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED) { // izin alınmadıysa
-            ActivityCompat.requestPermissions(this,arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
-                1)
-        } else {
-            val galeriIntext = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(galeriIntext,2)
-        }
-    }
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if (requestCode == 1) {
-            if (grantResults.size > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                val galeriIntext = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                startActivityForResult(galeriIntext,2)
-            }
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        imageView = findViewById(R.id.imageView)
-        if (requestCode == 2 && resultCode == Activity.RESULT_OK && data != null) {
-            pickedPhoto = data.data
-            if (pickedPhoto != null) {
-                if (Build.VERSION.SDK_INT >= 28) {
-                    val source = ImageDecoder.createSource(this.contentResolver,pickedPhoto!!)
-                    pickedBitMap = ImageDecoder.decodeBitmap(source)
-                    imageView.setImageBitmap(pickedBitMap)
-                }
-                else {
-                    pickedBitMap = MediaStore.Images.Media.getBitmap(this.contentResolver,pickedPhoto)
-                    imageView.setImageBitmap(pickedBitMap)
-                }
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+            if(data == null || data.data == null){
+                return
+            }
+
+            filePath = data.data
+            try {
+                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
+                imagePreview.setImageBitmap(bitmap)
+            } catch (e: IOException) {
+                e.printStackTrace()
             }
         }
-        super.onActivityResult(requestCode, resultCode, data)
     }
 }
+
+

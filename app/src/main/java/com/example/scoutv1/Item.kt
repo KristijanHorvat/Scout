@@ -1,8 +1,10 @@
 package com.example.scoutv1
 
 data class Item(
-    var name: String,
-    var imageLink: String,
-    var description: String,
-    var phoneNumber: String
+    var itemId: String="",
+    var name: String? = null,
+    var itemPrice: String? = null,
+    var imageLink: String? = null,
+    var description: String? = null,
+    var phoneNumber: String? = null
 )

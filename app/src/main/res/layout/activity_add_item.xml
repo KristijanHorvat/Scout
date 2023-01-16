@@ -45,12 +45,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="82dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="82dp"
         android:ems="10"
         android:hint="@string/itemNameText"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/ItemDescription"
+        app:layout_constraintBottom_toTopOf="@+id/ItemPrice"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemCategory" />
 
@@ -66,8 +68,9 @@
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toTopOf="@+id/ItemPhoneNUmber"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ItemName" />
+        app:layout_constraintTop_toBottomOf="@+id/ItemPrice" />
 
     <EditText
         android:id="@+id/ItemPhoneNUmber"
@@ -94,5 +97,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <EditText
+        android:id="@+id/ItemPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="82dp"
+        android:layout_marginEnd="82dp"
+        android:ems="10"
+        android:hint="@string/Price"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/ItemDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ItemName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

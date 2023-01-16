@@ -2,27 +2,14 @@ package com.example.scoutv1
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Activity.RESULT_OK
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import android.widget.*
-import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.core.content.ContextCompat
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -42,10 +29,13 @@ class addItemActivity : AppCompatActivity() {
     lateinit var itemName: EditText
     lateinit var itemDescription: EditText
     lateinit var itemPhoneNumber: EditText
+    lateinit var itemPrice: EditText
+
     var path: String = ""
     private val db = Firebase.firestore
     lateinit var categoriesSpinner: Spinner
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_item)
@@ -59,6 +49,7 @@ class addItemActivity : AppCompatActivity() {
         itemName = findViewById(R.id.ItemName)
         itemDescription = findViewById(R.id.ItemDescription)
         itemPhoneNumber = findViewById(R.id.ItemPhoneNUmber)
+        itemPrice = findViewById(R.id.ItemPrice)
         categoriesSpinner = findViewById(R.id.itemCategory)
 
         //Spinner adapter
@@ -77,7 +68,9 @@ class addItemActivity : AppCompatActivity() {
             uploadImage()
 
             val item = Item(
+                "",
                 itemName.text.toString(),
+                itemPrice.text.toString(),
                 path.toString(),
                 itemDescription.text.toString(),
                 itemPhoneNumber.text.toString()

@@ -78,7 +78,7 @@
         android:ems="10"
         android:hint="@string/itemPhoneNumberText"
         android:inputType="textPersonName"
-        android:phoneNumber="true"
+        android:phoneNumber="false"
         app:layout_constraintBottom_toTopOf="@+id/button9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

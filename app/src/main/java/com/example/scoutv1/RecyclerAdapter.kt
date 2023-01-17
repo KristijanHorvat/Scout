@@ -1,5 +1,6 @@
 package com.example.scoutv1
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 class RecyclerAdapter(val items: ArrayList<Item>,val listener: ContentListener):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -31,12 +34,21 @@ class RecyclerAdapter(val items: ArrayList<Item>,val listener: ContentListener):
     class ItemViewHolder(val view: View): RecyclerView.ViewHolder(view){
         private val itemImage = view.findViewById<ImageView>(R.id.ItemImage)
         private val itemName = view.findViewById<TextView>(R.id.ItemNameView)
-        private val itemDescription = view.findViewById<TextView>(R.id.ItemDescriptionView)
+        private val itemPrice = view.findViewById<TextView>(R.id.ItemDescriptionView)
+        private val db = Firebase.storage
+        private var imageURL = ""
 
         fun bind(index: Int, item: Item, listener: ContentListener){
-            Glide.with(view.context).load(item.imageLink).into(itemImage)
+            val imgPath = db.reference.child("myImages/"+item.imageLink)
+            //Log.d("ada", imgPath.toString()) gs:// url
+            imgPath.downloadUrl.addOnSuccessListener {Uri->
+                imageURL = Uri.toString()
+                //Log.d("imageURL", imageURL) full https url
+                Glide.with(view.context).load(imageURL).into(itemImage)
+            }
+
             itemName.setText(item.name)
-            itemDescription.setText(item.description)
+            itemPrice.setText(item.itemPrice)
         }
     }
 

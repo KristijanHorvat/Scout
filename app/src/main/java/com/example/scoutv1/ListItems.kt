@@ -1,5 +1,6 @@
 package com.example.scoutv1
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,34 +13,39 @@ class ListItems : AppCompatActivity(), RecyclerAdapter.ContentListener {
 
     private val db = Firebase.firestore
     private lateinit var recyclerAdapter: RecyclerAdapter
-    var recyclerView = findViewById<RecyclerView>(R.id.itemsList)
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
+        var recyclerView = findViewById<RecyclerView>(R.id.itemsList)
+        var category =  intent.getStringExtra("category");
 
-        db.collection("Vehicle")
-            .get()
-            .addOnSuccessListener { result ->
-                val itemsList = ArrayList<Item>()
-                for (data in result.documents) {
-                    val item = data.toObject(Item::class.java)
-                    Log.w("ListItems", "Error getting documents.")
-                    if (item != null) {
-                        item.itemId = data.id
-                        itemsList.add(item)
+        if (category != null) {
+            db.collection(category!!)
+                .get()
+                .addOnSuccessListener { result ->
+                    val itemsList = ArrayList<Item>()
+                    for (data in result.documents) {
+                        val item = data.toObject(Item::class.java)
+                        Log.w("ListItems", "Error getting documents.")
+                        if (item != null) {
+                            item.itemId = data.id
+                            itemsList.add(item)
+                        }
+                    }
+                    recyclerAdapter = RecyclerAdapter(itemsList, this@ListItems)
+                    recyclerView.apply {
+                        layoutManager = LinearLayoutManager(this@ListItems)
+                        adapter = recyclerAdapter
                     }
                 }
-                recyclerAdapter = RecyclerAdapter(itemsList, this@ListItems)
-                recyclerView.apply {
-                    layoutManager = LinearLayoutManager(this@ListItems)
-                    adapter = recyclerAdapter
+                .addOnFailureListener { exception ->
+                    Log.w("ListItems", "Error getting documents.",
+                        exception)
                 }
-            }
-            .addOnFailureListener { exception ->
-                Log.w("ListItems", "Error getting documents.",
-                    exception)
-            }
+        }
     }
 
     override fun onItemButtonClick(index: Int, person: Item) {

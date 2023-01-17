@@ -99,8 +99,8 @@ class addItemActivity : AppCompatActivity() {
 
     private fun uploadImage() {
         if (filePath != null) {
-            path = "myImages/" + UUID.randomUUID().toString()
-            val ref = storageReference?.child(path)
+            path = UUID.randomUUID().toString()
+            val ref = storageReference?.child("myImages/" + path)
             val uploadTask = ref?.putFile(filePath!!)
             Toast.makeText(this, "Upload image success", Toast.LENGTH_SHORT).show()
         } else {

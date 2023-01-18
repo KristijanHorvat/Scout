@@ -22,6 +22,8 @@
     <string name="addIteButton">Add Item</string>
     <string name="myAccountButton">My Account</string>
     <string name="Price">Price</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

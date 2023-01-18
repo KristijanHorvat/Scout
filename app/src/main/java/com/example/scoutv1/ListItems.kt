@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.ktx.firestore
@@ -39,6 +40,20 @@ class ListItems : AppCompatActivity(), RecyclerAdapter.ContentListener {
                     recyclerView.apply {
                         layoutManager = LinearLayoutManager(this@ListItems)
                         adapter = recyclerAdapter
+                        recyclerAdapter.setOnItemClickListener(object:RecyclerAdapter.onItemClickListener{
+                            override fun onItemClick(position: Int) {
+                                //Toast.makeText(this@ListItems, "you clicked", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this@ListItems, ItemDetails::class.java)
+                                intent.putExtra("image", itemsList[position].imageLink)
+                                intent.putExtra("name", itemsList[position].name)
+                                intent.putExtra("price", itemsList[position].itemPrice)
+                                intent.putExtra("description", itemsList[position].description)
+                                intent.putExtra("phoneNumber", itemsList[position].phoneNumber)
+                                startActivity(intent)
+                            }
+
+                        })
+
                     }
                 }
                 .addOnFailureListener { exception ->

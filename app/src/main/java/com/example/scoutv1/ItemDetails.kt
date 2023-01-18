@@ -3,6 +3,7 @@ package com.example.scoutv1
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -13,8 +14,8 @@ class ItemDetails : AppCompatActivity() {
         setContentView(R.layout.activity_item_details)
 
         val bundle : Bundle?= intent.extras
-        val image = bundle!!.getString("image")
-        val name = bundle.getString("name")
+        val name = bundle!!.getString("name")
+        val image = bundle.getString("image")
         val price = bundle.getString("price")
         val description = bundle.getString("description")
         val phoneNumber = bundle.getString("phoneNumber")

@@ -45,6 +45,9 @@ class ListItems : AppCompatActivity(), RecyclerAdapter.ContentListener {
                                 //Toast.makeText(this@ListItems, "you clicked", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this@ListItems, ItemDetails::class.java)
                                 intent.putExtra("image", itemsList[position].imageLink)
+                                if (itemsList[position].imageLink != null) {
+                                    itemsList[position].imageLink?.let { Log.w("image link before", it) }
+                                }
                                 intent.putExtra("name", itemsList[position].name)
                                 intent.putExtra("price", itemsList[position].itemPrice)
                                 intent.putExtra("description", itemsList[position].description)

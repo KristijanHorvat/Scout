@@ -89,10 +89,10 @@
 
     <Spinner
         android:id="@+id/itemCategory"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
         app:layout_constraintBottom_toTopOf="@+id/ItemName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -56,7 +56,7 @@ class RecyclerAdapter(val items: ArrayList<Item>,val listener: ContentListener):
             //Log.d("ada", imgPath.toString()) gs:// url
             imgPath.downloadUrl.addOnSuccessListener {Uri->
                 imageURL = Uri.toString()
-                //Log.d("imageURL", imageURL) full https url
+                //Log.d("imageURL in recycler", imageURL) //full https url
                 Glide.with(view.context).load(imageURL).into(itemImage)
             }
 

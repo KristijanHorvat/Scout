@@ -1,6 +1,5 @@
 package com.example.scoutv1
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.Glide.init
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
-class RecyclerAdapter(val items: ArrayList<Item>,val listener: ContentListener):
+class RecyclerAdapter(val items: ArrayList<Item>, val listener: ListItems):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var mListener: onItemClickListener

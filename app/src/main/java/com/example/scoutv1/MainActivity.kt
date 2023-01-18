@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +20,15 @@ class MainActivity : AppCompatActivity() {
         val buttonPets = findViewById<Button>(R.id.button6)
         val buttonOther = findViewById<Button>(R.id.button7)
         val myAccountButton = findViewById<Button>(R.id.button11)
+        val searchButton = findViewById<Button>(R.id.searchButton)
+        val searchBar = findViewById<EditText>(R.id.searchBar)
+
+        searchButton.setOnClickListener {
+            var intent = Intent(this, ListItems::class.java)
+            intent.putExtra("name", searchBar.text.toString())
+            intent.putExtra("flag", "1")
+            startActivity(intent)
+        }
 
         buttonClick.setOnClickListener {
             val intent = Intent(this, addItemActivity::class.java)

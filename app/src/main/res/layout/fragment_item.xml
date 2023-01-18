@@ -1,14 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ItemFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="prvi" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/itemImageView"
+            android:layout_width="350dp"
+            android:layout_height="373dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="23dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintBottom_toTopOf="@+id/nameView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nameView"
+            android:layout_width="350dp"
+            android:layout_height="76dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginBottom="12dp"
+            android:text="TextView"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toTopOf="@+id/priceView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemImageView" />
+
+        <TextView
+            android:id="@+id/priceView"
+            android:layout_width="350dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="32dp"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

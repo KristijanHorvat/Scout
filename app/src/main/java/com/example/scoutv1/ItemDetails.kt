@@ -25,6 +25,17 @@ class ItemDetails : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
+        var bundleS1 = Bundle()
+        bundleS1.putString("image", image)
+        bundleS1.putString("name", name)
+        bundleS1.putString("price", price)
+        bundleS1.putString("description", description)
+        bundleS1.putString("phoneNumber", phoneNumber)
+
+        itemFragment.arguments = bundleS1
+        detailsFragment.arguments = bundleS1
+        contactFragment.arguments = bundleS1
+
         replaceFragment(itemFragment)
 
         bottomNavigationView.setOnItemSelectedListener {

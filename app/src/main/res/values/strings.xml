@@ -24,6 +24,8 @@
     <string name="Price">Price</string>
 
     <string name="callButton">Call</string>
+    <string name="logOutBtn">Log out</string>
+    <string name="resetPassBtn">Reset password</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

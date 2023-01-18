@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         val buttonInstruments = findViewById<Button>(R.id.button5)
         val buttonPets = findViewById<Button>(R.id.button6)
         val buttonOther = findViewById<Button>(R.id.button7)
+        val myAccountButton = findViewById<Button>(R.id.button11)
 
         buttonClick.setOnClickListener {
             val intent = Intent(this, addItemActivity::class.java)
@@ -62,6 +63,11 @@ class MainActivity : AppCompatActivity() {
         buttonOther.setOnClickListener {
             val intent = Intent(this, ListItems::class.java)
             intent.putExtra("category", "Other")
+            startActivity(intent)
+        }
+
+        myAccountButton.setOnClickListener {
+            val intent = Intent(this, UserProfile::class.java)
             startActivity(intent)
         }
     }

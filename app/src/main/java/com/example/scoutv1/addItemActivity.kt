@@ -80,17 +80,6 @@ class addItemActivity : AppCompatActivity() {
                 email,
                 itemSelected
             )
-
-            //db.collection(itemSelected)
-                //.add(item)
-               // .addOnSuccessListener { documentReference ->
-                  //  Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                  //  Toast.makeText(this, "Upload success", Toast.LENGTH_SHORT).show()
-               // }
-               // .addOnFailureListener { e ->
-               //     Log.w(TAG, "Error adding document", e)
-               //     Toast.makeText(this, "Error adding item!", Toast.LENGTH_SHORT).show()
-               // }
             db.collection("search")
                 .add(item)
                 .addOnSuccessListener { documentReference ->

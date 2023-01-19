@@ -31,7 +31,8 @@ class UserProfile : AppCompatActivity(), UserItemsRecyclerAdapter.ContentListene
         val emailTextView = findViewById<TextView>(R.id.emailTextView)
         val recyclerViewItems = findViewById<RecyclerView>(R.id.UserItemsView)
 
-        emailTextView.text = firebaseAuth.currentUser?.email.toString()
+        val email = firebaseAuth.currentUser?.email.toString()
+        emailTextView.text = email
 
         logOutButton.setOnClickListener {
             firebaseAuth.signOut()
@@ -41,7 +42,7 @@ class UserProfile : AppCompatActivity(), UserItemsRecyclerAdapter.ContentListene
         }
 
         resetPassBtn.setOnClickListener {
-            firebaseAuth!!.sendPasswordResetEmail(firebaseAuth.currentUser?.email.toString())
+            firebaseAuth!!.sendPasswordResetEmail(email)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Password reset email sent!", Toast.LENGTH_SHORT)
@@ -52,7 +53,7 @@ class UserProfile : AppCompatActivity(), UserItemsRecyclerAdapter.ContentListene
                 }
         }
 
-        db.collection("search")
+        db.collection("search").whereEqualTo("userMail", email)
             .get()
             .addOnSuccessListener { result ->
                 val itemList = ArrayList<Item>()

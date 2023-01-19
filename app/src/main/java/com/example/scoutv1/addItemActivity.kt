@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.*
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -20,6 +21,7 @@ import java.util.*
 
 class addItemActivity : AppCompatActivity() {
 
+    private lateinit var firebaseAuth: FirebaseAuth
     val PICK_IMAGE_REQUEST = 71
     var filePath: Uri? = null
     var firebaseStore: FirebaseStorage? = null
@@ -40,7 +42,8 @@ class addItemActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_item)
 
-
+        firebaseAuth = FirebaseAuth.getInstance()
+        val email = firebaseAuth.currentUser?.email.toString()
         firebaseStore = FirebaseStorage.getInstance()
         storageReference = FirebaseStorage.getInstance().reference
 
@@ -66,26 +69,28 @@ class addItemActivity : AppCompatActivity() {
         imagePreview.setOnClickListener { launchGallery() }
         btn_upload_image.setOnClickListener {
             uploadImage()
-
+            var itemSelected = categoriesSpinner.getSelectedItem().toString();
             val item = Item(
                 "",
                 itemName.text.toString(),
                 itemPrice.text.toString(),
                 path.toString(),
                 itemDescription.text.toString(),
-                itemPhoneNumber.text.toString()
+                itemPhoneNumber.text.toString(),
+                email,
+                itemSelected
             )
-            var itemSelected = categoriesSpinner.getSelectedItem().toString();
-            db.collection(itemSelected)
-                .add(item)
-                .addOnSuccessListener { documentReference ->
-                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                    Toast.makeText(this, "Upload success", Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener { e ->
-                    Log.w(TAG, "Error adding document", e)
-                    Toast.makeText(this, "Error adding item!", Toast.LENGTH_SHORT).show()
-                }
+
+            //db.collection(itemSelected)
+                //.add(item)
+               // .addOnSuccessListener { documentReference ->
+                  //  Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                  //  Toast.makeText(this, "Upload success", Toast.LENGTH_SHORT).show()
+               // }
+               // .addOnFailureListener { e ->
+               //     Log.w(TAG, "Error adding document", e)
+               //     Toast.makeText(this, "Error adding item!", Toast.LENGTH_SHORT).show()
+               // }
             db.collection("search")
                 .add(item)
                 .addOnSuccessListener { documentReference ->

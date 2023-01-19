@@ -73,8 +73,7 @@ class ListItems : AppCompatActivity() {
                 }
         }else {
 
-        if (category != null) {
-            db.collection(category!!)
+            db.collection("search").whereEqualTo("itemCategory", category)
                 .get()
                 .addOnSuccessListener { result ->
                     val itemsList = ArrayList<Item>()
@@ -121,7 +120,7 @@ class ListItems : AppCompatActivity() {
                         exception
                     )
                 }
-        }
+
     }
     }
 

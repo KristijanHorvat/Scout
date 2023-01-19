@@ -9,12 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class ListItems : AppCompatActivity(), RecyclerAdapter.ContentListener {
+class ListItems : AppCompatActivity() {
 
     private val db = Firebase.firestore
     private lateinit var recyclerAdapter: RecyclerAdapter
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +36,7 @@ class ListItems : AppCompatActivity(), RecyclerAdapter.ContentListener {
                             itemsList.add(item)
                         }
                     }
-                    recyclerAdapter = RecyclerAdapter(itemsList, this@ListItems)
+                    recyclerAdapter = RecyclerAdapter(itemsList)
                     recyclerView.apply {
                         layoutManager = LinearLayoutManager(this@ListItems)
                         adapter = recyclerAdapter
@@ -88,7 +86,7 @@ class ListItems : AppCompatActivity(), RecyclerAdapter.ContentListener {
                             itemsList.add(item)
                         }
                     }
-                    recyclerAdapter = RecyclerAdapter(itemsList, this@ListItems)
+                    recyclerAdapter = RecyclerAdapter(itemsList)
                     recyclerView.apply {
                         layoutManager = LinearLayoutManager(this@ListItems)
                         adapter = recyclerAdapter
@@ -127,6 +125,5 @@ class ListItems : AppCompatActivity(), RecyclerAdapter.ContentListener {
     }
     }
 
-    override fun onItemButtonClick(index: Int, person: Item) {
-    }
+
 }

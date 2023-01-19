@@ -22,6 +22,7 @@
     <string name="addIteButton">Add Item</string>
     <string name="myAccountButton">My Account</string>
     <string name="Price">Price</string>
+    <string name="currency">€</string>
 
     <string name="callButton">Call</string>
     <string name="logOutBtn">Log out</string>

@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <ImageView
         android:id="@+id/ItemImage"
         android:layout_width="100dp"
@@ -13,23 +14,25 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:srcCompat="@drawable/ic_baseline_image_24" />
 
-    <EditText
+    <TextView
         android:id="@+id/ItemNameView"
-        android:layout_width="294dp"
+        android:layout_width="250dp"
         android:layout_height="49dp"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/ItemDescriptionView"
-        app:layout_constraintEnd_toStartOf="@+id/deleteButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ItemImage"
         app:layout_constraintTop_toTopOf="@+id/ItemImage" />
 
-    <EditText
+    <TextView
         android:id="@+id/ItemDescriptionView"
-        android:layout_width="0dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ItemImage"

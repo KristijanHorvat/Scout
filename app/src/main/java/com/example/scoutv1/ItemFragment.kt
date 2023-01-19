@@ -55,7 +55,7 @@ class ItemFragment : Fragment() {
             itemNameView.setText(name)
         }
         if (itemPriceView != null) {
-            itemPriceView.setText(price+" €")
+            itemPriceView.setText(price+"€")
         }
         if (itemImageView != null) {
             //itemImageView.setText(name)

@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
-class RecyclerAdapter(val items: ArrayList<Item>, val listener: ListItems):
+class RecyclerAdapter(val items: ArrayList<Item>):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var mListener: onItemClickListener
@@ -33,7 +33,7 @@ class RecyclerAdapter(val items: ArrayList<Item>, val listener: ListItems):
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
             is ItemViewHolder -> {
-                holder.bind(position, items[position], listener)
+                holder.bind(position, items[position])
             }
         }
     }
@@ -49,7 +49,7 @@ class RecyclerAdapter(val items: ArrayList<Item>, val listener: ListItems):
         private val db = Firebase.storage
         private var imageURL = ""
 
-        fun bind(index: Int, item: Item, listener: ContentListener){
+        fun bind(index: Int, item: Item){
             val imgPath = db.reference.child("myImages/"+item.imageLink)
             //Log.d("ada", imgPath.toString()) gs:// url
             imgPath.downloadUrl.addOnSuccessListener {Uri->
@@ -59,7 +59,7 @@ class RecyclerAdapter(val items: ArrayList<Item>, val listener: ListItems):
             }
 
             itemName.setText(item.name)
-            itemPrice.setText(item.itemPrice)
+            itemPrice.setText(item.itemPrice + "€")
         }
         init{
             itemView.setOnClickListener {
@@ -68,7 +68,4 @@ class RecyclerAdapter(val items: ArrayList<Item>, val listener: ListItems):
         }
     }
 
-    interface ContentListener{
-        fun onItemButtonClick(index: Int, person: Item)
-    }
 }

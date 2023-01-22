@@ -34,14 +34,19 @@ class SignInActivity : AppCompatActivity() {
         }
 
         resetPassTextView.setOnClickListener{
-            firebaseAuth!!.sendPasswordResetEmail(emailEt.text.toString())
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(this, "Password reset email sent!", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this, "Email not existed", Toast.LENGTH_SHORT).show()
+            if (emailField.text.toString().isNotEmpty()) {
+                firebaseAuth!!.sendPasswordResetEmail(emailEt.text.toString())
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "Password reset email sent!", Toast.LENGTH_SHORT)
+                                .show()
+                        } else {
+                            Toast.makeText(this, "Email not existed", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
+            } else {
+                Toast.makeText(this, "Enter email!", Toast.LENGTH_SHORT).show()
+            }
         }
 
         signInButton.setOnClickListener {

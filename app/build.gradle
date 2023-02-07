@@ -8,6 +8,10 @@ plugins {
 apply plugin: 'com.android.application'
 
 android {
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
+
     namespace 'com.example.scoutv1'
     compileSdk 32
 
